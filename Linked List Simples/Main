@@ -1,0 +1,35 @@
+class Main {
+  public static void main(String[] args) {
+    LinkedListOfInteger minhaLista = new LinkedListOfInteger();
+
+    minhaLista.status();
+    
+    minhaLista.add(1);
+    minhaLista.status();
+    
+    minhaLista.add(2);
+    minhaLista.status();
+    
+    minhaLista.add(3);
+    minhaLista.status();
+
+    minhaLista.addAt(-10, 4);
+    minhaLista.status();
+    
+    minhaLista.addAt(100, 5);
+    minhaLista.status();
+    
+    minhaLista.addAt(2, 6);
+    minhaLista.status();    
+
+    minhaLista.remove(4);
+    minhaLista.status();    
+
+    minhaLista.remove(5);
+    minhaLista.status();    
+
+    minhaLista.remove(2);
+    minhaLista.status();   
+
+  }
+}

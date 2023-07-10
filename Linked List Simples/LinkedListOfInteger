@@ -1,0 +1,123 @@
+class LinkedListOfInteger{
+
+  // Definição do nodo básico
+  private class Node{
+    public int element;
+    public Node next;
+    public Node(int e){
+      element=e;
+      next=null;
+    }
+  }
+
+  // Atributos da lista linear com lista encadeada
+  private Node head;
+	private Node tail;
+	private int count;
+
+  //Metodos da lista linear com lista encadeada
+  public LinkedListOfInteger (){
+    count=0;
+    head=null;
+    tail=null;
+  }
+
+	public void add (int element){
+    // Regra da implementacao em Java --> Insere no inicio
+
+    //1º passo -> cria o nodo
+    Node aux = new Node(element);
+
+    //2º passo -> vincula o novo nodo ao primeiro nodo da lista (se existe elemento na lista)
+    aux.next=head;
+
+    //3º passo -> Atualiza head
+    if(count==0)
+      tail=aux;
+    head=aux;
+    count++;
+
+  }
+	public void addAt(int index, int element){
+    if(index<=0 || count==0){
+      // deve-se inserir no inicio da lista linear
+      add(element);
+    }
+    else if(index>=count){
+    // deve-se inserir no final da lista
+      //1º passo -> cria o nodo
+      Node aux = new Node(element);
+
+      //2º passo -> vincula o último nodo da lista ao novo nodo (se existe elemento na lista)
+      tail.next=aux;
+
+      //3º passo -> Atualiza tail
+      tail=aux;
+      count++;
+    }
+    else{
+      // deve-se inserir no meio da lista
+      Node navegacao=head;
+
+      for(int idx=0; idx<index-1; idx++)
+        navegacao=navegacao.next;
+
+      //1º passo -> cria o nodo
+      Node aux = new Node(element);
+      //2º passo -> referenciar o proximo elemento da lista
+      aux.next = navegacao.next;
+      //3º passo -> referenciar o novo elemento da lista
+      navegacao.next=aux;
+      count++;
+    }
+
+  }
+
+  public void status(){
+    Node aux=head;
+    System.out.printf("A lista possui %d elementos\n",count);
+    while(aux!=null){
+      System.out.printf("%d --> ", aux.element);
+      aux=aux.next;
+    }
+    System.out.println();      
+  }
+	//public int get (int index){}
+	//public int set (int index , int element){}
+	public boolean remove (int element){
+    Node aux=head;
+
+    while(aux!=null && aux.element!=element)
+      aux=aux.next;    
+
+    if(aux == null)
+      return false;
+    else{
+      if(aux==head){
+        head=aux.next;
+        if(count==1)
+          tail=head;
+        count--;
+        aux.next=null;
+      }
+      else{
+        Node aux2 = head;
+        while(aux2.next!=aux)
+          aux2=aux2.next;
+
+        aux2.next=aux.next;
+        aux.next=null;
+        if(aux==tail)
+          tail=aux2;
+        count--;
+      }
+      return true;
+    }
+  }
+	//public int removeByIndex (int index ){}
+	//public boolean isEmpty(){}
+	//public int size(){}
+	//public boolean contains (int element){}
+	//public int indexOf (int element){}
+	//public void clear ( ){}
+}
